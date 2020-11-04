@@ -25,8 +25,6 @@ use std::cmp::{Eq, PartialEq, Ord, PartialOrd, Ordering};
 use std::ops::{Add, Sub, AddAssign, SubAssign};
 use std::time::Duration;
 
-
-
 #[derive(Debug, Copy, Clone)]
 pub struct Instant {
     /// Unit is milliseconds.
