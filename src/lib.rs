@@ -24,6 +24,8 @@ pub use timer::*;
 pub use std::time::{Instant, SystemTime, UNIX_EPOCH};
 #[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
 pub use wasm::*;
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub use tokio_timeout::*;
 
 mod timer;
 #[cfg(all(target_arch = "wasm32", target_os = "unknown"))]

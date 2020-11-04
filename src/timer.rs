@@ -252,6 +252,9 @@ mod heap;
 pub mod ext;
 pub use ext::{TryFutureExt, TryStreamExt};
 
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub mod tokio_timeout;
+
 /// A "timer heap" used to power separately owned instances of `Delay` and
 /// `Interval`.
 ///
