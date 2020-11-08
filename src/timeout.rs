@@ -161,7 +161,7 @@ where
 
         // Now check the timer
         match me.delay.poll(cx) {
-            Poll::Ready(result) => {
+            Poll::Ready(_) => {
                 Poll::Ready(Err(Elapsed(())))
             },
             Poll::Pending => Poll::Pending,
