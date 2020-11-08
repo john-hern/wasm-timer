@@ -6,5 +6,3 @@ mod platform;
 #[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
 #[path = "global/wasm.rs"]
 mod platform;
-
-

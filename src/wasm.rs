@@ -21,8 +21,8 @@
 
 #![cfg(all(target_arch = "wasm32", target_os = "unknown"))]
 
-use std::cmp::{Eq, PartialEq, Ord, PartialOrd, Ordering};
-use std::ops::{Add, Sub, AddAssign, SubAssign};
+use std::cmp::{Eq, Ord, Ordering, PartialEq, PartialOrd};
+use std::ops::{Add, AddAssign, Sub, SubAssign};
 use std::time::Duration;
 
 #[derive(Debug, Copy, Clone)]
@@ -77,7 +77,9 @@ impl Add<Duration> for Instant {
 
     fn add(self, other: Duration) -> Instant {
         let new_val = self.inner + other.as_millis() as f64;
-        Instant { inner: new_val as f64 }
+        Instant {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -86,7 +88,9 @@ impl Sub<Duration> for Instant {
 
     fn sub(self, other: Duration) -> Instant {
         let new_val = self.inner - other.as_millis() as f64;
-        Instant { inner: new_val as f64 }
+        Instant {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -141,7 +145,7 @@ impl SystemTime {
     pub fn duration_since(&self, earlier: SystemTime) -> Result<Duration, ()> {
         let dur_ms = self.inner - earlier.inner;
         if dur_ms < 0.0 {
-            return Err(())
+            return Err(());
         }
         Ok(Duration::from_millis(dur_ms as u64))
     }
@@ -159,7 +163,7 @@ impl SystemTime {
     }
 }
 
-impl Into<std::time::SystemTime> for SystemTime { 
+impl Into<std::time::SystemTime> for SystemTime {
     fn into(self) -> std::time::SystemTime {
         let since_epoc = self.duration_since(UNIX_EPOCH).unwrap();
         std::time::UNIX_EPOCH + std::time::Duration::from_secs(since_epoc.as_secs())
@@ -171,7 +175,9 @@ impl Add<Duration> for SystemTime {
 
     fn add(self, other: Duration) -> SystemTime {
         let new_val = self.inner + other.as_millis() as f64;
-        SystemTime { inner: new_val as f64 }
+        SystemTime {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -180,7 +186,9 @@ impl Sub<Duration> for SystemTime {
 
     fn sub(self, other: Duration) -> SystemTime {
         let new_val = self.inner - other.as_millis() as f64;
-        SystemTime { inner: new_val as f64 }
+        SystemTime {
+            inner: new_val as f64,
+        }
     }
 }
 
@@ -195,4 +203,3 @@ impl SubAssign<Duration> for SystemTime {
         *self = *self - rhs;
     }
 }
-

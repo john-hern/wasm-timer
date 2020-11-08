@@ -1,14 +1,12 @@
-// This is basically a copy of the tokio timeout structure. Slight modifications have been made to ensure capability with the internal Delay function. 
+// This is basically a copy of the tokio timeout structure. Slight modifications have been made to ensure capability with the internal Delay function.
 
-
-use crate::{ Delay, Instant };
+use crate::{Delay, Instant};
 use pin_project_lite::pin_project;
 use std::fmt;
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{self, Poll};
 use std::time::Duration;
-
 
 /// Require a `Future` to complete before the specified duration has elapsed.
 ///
@@ -91,7 +89,6 @@ pub fn timeout_at<T>(deadline: Instant, future: T) -> Timeout<T>
 where
     T: Future,
 {
-    
     let delay = Delay::new_at(deadline);
 
     Timeout {
@@ -161,9 +158,7 @@ where
 
         // Now check the timer
         match me.delay.poll(cx) {
-            Poll::Ready(_) => {
-                Poll::Ready(Err(Elapsed(())))
-            },
+            Poll::Ready(_) => Poll::Ready(Err(Elapsed(()))),
             Poll::Pending => Poll::Pending,
         }
     }
