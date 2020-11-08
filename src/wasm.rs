@@ -159,6 +159,13 @@ impl SystemTime {
     }
 }
 
+impl Into<std::time::SystemTime> for SystemTime { 
+    fn into(self) -> std::time::SystemTime {
+        let tmp = self.duration_since(UNIX_EPOCH).unwrap();
+        std::time::UNIX_EPOCH + std::time::Duration::from_secs(tmp.as_secs())
+    }
+}
+
 impl Add<Duration> for SystemTime {
     type Output = SystemTime;
 
